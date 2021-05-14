@@ -1,0 +1,23 @@
+{
+    "name": "next-graphql-api",
+    "version": "1.0.0",
+    "description": "API for GraphQL",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "keywords": [
+        "API",
+        "Backend",
+        "Service",
+        "GraphQL",
+        "GCP"
+    ],
+    "author": "Fons Hettema",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "firebase-admin": "^9.7.0"
+    }
+}
