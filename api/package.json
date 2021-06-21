@@ -1,0 +1,29 @@
+{
+  "name": "next-graphql-api",
+  "version": "1.0.0",
+  "description": "API for GraphQL",
+  "scripts": {
+    "build": "tsc",
+    "start": "node src/index.ts"
+  },
+  "keywords": [
+    "API",
+    "Backend",
+    "Service",
+    "GraphQL",
+    "GCP"
+  ],
+  "author": "Fons Hettema",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.24.1",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.7.0",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.12.4"
+  },
+  "devDependencies": {
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.4"
+  }
+}
