@@ -43,7 +43,7 @@ testem.log
 Thumbs.db
 
 # Service acc
-api/service-account.json
+*/**/service-account.json
 
 # Env
 .env
