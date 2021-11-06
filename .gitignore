@@ -43,7 +43,11 @@ testem.log
 Thumbs.db
 
 # Service acc
-api/src/service-account.json
+src/api/src/service-account.json
 
 # Env
 .env
+
+# next.js
+src/frontend/.next/
+src/frontend/out/
