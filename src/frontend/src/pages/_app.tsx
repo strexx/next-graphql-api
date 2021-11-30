@@ -1,17 +1,21 @@
+import { FC } from "react";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../lib/apolloClient";
+import { NextComponentType } from "next";
+import Header from "../components/Header/Header";
 
 type Props = {
-  Component: any;
-  pageProps: any;
+  Component: NextComponentType;
+  pageProps: {};
 };
 
-const App: React.FunctionComponent<Props> = ({ Component, pageProps }) => {
+const App: FC<Props> = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps);
 
   return (
     <>
       <ApolloProvider client={apolloClient}>
+        <Header />
         <Component {...pageProps} />
       </ApolloProvider>
     </>

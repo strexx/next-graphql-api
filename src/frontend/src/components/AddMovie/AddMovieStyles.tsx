@@ -7,7 +7,9 @@ export const AddMovieStyle = styled.section`
   h1 {
     font-size: 24px;
   }
+`;
 
+export const AddMovieFormStyle = styled.form`
   fieldset {
     width: 100%;
     border: none;

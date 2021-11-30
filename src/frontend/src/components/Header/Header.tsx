@@ -1,8 +1,9 @@
+import { FC } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { HeaderStyle } from "./HeaderStyles";
 
-const Header: React.FunctionComponent = () => {
+const Header: FC = () => {
   const { pathname } = useRouter();
 
   return (

@@ -1,10 +1,9 @@
+import { FC } from "react";
 import AddMovie from "../components/AddMovie/AddMovie";
 import App from "../components/App";
-import Header from "../components/Header/Header";
 
-const AddMoviePage = () => (
+const AddMoviePage: FC = () => (
   <App>
-    <Header />
     <AddMovie />
   </App>
 );

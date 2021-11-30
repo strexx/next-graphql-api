@@ -1,35 +1,62 @@
+import React, { useCallback } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
-import { AddMovieStyle } from "./AddMovieStyles";
+
 import { ADD_MOVIE } from "./mutations";
+import { ErrorMessageStyle } from "../ErrorMessage/ErrorMessageStyles";
+import { AddMovieStyle, AddMovieFormStyle } from "./AddMovieStyles";
+
+type RawFormValues = {
+  name: { value: string };
+  description: { value: string };
+  cover_image: { value: string };
+  imdb_url: { value: string };
+};
+
+type FormValues = {
+  name: string;
+  description: string;
+  cover_image: string;
+  imdb_url: string;
+};
 
 const AddMovie: React.FunctionComponent = () => {
   const router = useRouter();
 
-  const [addMovie, { error, data }] = useMutation(ADD_MOVIE, {
+  const [addMovie, { error, loading }] = useMutation(ADD_MOVIE, {
     onCompleted() {
+      // Go back to the homepage when the movie is added successfully
       router.push("/");
     },
   });
 
-  function handleSubmit(e: any) {
-    e.preventDefault();
-    const { name, description, cover_image, imdb_url } = e.target;
+  const handleSubmit = useCallback(
+    (e: React.SyntheticEvent) => {
+      e.preventDefault();
 
-    const params = {
-      name: name.value,
-      description: description.value,
-      cover_image: cover_image.value,
-      imdb_url: imdb_url.value,
-    };
+      const { name, description, cover_image, imdb_url } =
+        e.target as typeof e.target & RawFormValues;
 
-    addMovie({ variables: params });
-  }
+      const variables: FormValues = {
+        name: name.value,
+        description: description.value,
+        cover_image: cover_image.value,
+        imdb_url: imdb_url.value,
+      };
+
+      addMovie({ variables });
+    },
+    [addMovie]
+  );
 
   return (
     <AddMovieStyle>
       <h1>Add a favorite movie</h1>
-      <form action="" method="POST" onSubmit={handleSubmit}>
+      {error && (
+        <ErrorMessageStyle message={`Error adding movie. ${error.message}`} />
+      )}
+      {loading && <div>Processing...</div>}
+      <AddMovieFormStyle method="POST" onSubmit={handleSubmit}>
         <fieldset>
           <div>
             <label htmlFor="name">Name*:</label>
@@ -49,7 +76,7 @@ const AddMovie: React.FunctionComponent = () => {
           </div>
           <button type="submit">Submit</button>
         </fieldset>
-      </form>
+      </AddMovieFormStyle>
     </AddMovieStyle>
   );
 };
