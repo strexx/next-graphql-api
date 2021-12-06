@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { FC, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 
@@ -20,7 +20,7 @@ type FormValues = {
   imdb_url: string;
 };
 
-const AddMovie: React.FunctionComponent = () => {
+const AddMovie: FC = () => {
   const router = useRouter();
 
   const [addMovie, { error, loading }] = useMutation(ADD_MOVIE, {
