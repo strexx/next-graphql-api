@@ -25,18 +25,21 @@ const AddMovie: React.FunctionComponent = () => {
 
   const [addMovie, { error, loading }] = useMutation(ADD_MOVIE, {
     onCompleted() {
-      // Go back to the homepage when the movie is added successfully
+      /* Go back to the homepage when the movie is added successfully */
       router.push("/");
     },
   });
 
+  /* Handle all form values and use them for our addMovie mutation */
   const handleSubmit = useCallback(
     (e: React.SyntheticEvent) => {
       e.preventDefault();
 
+      /* Destruct values from form values */
       const { name, description, cover_image, imdb_url } =
         e.target as typeof e.target & RawFormValues;
 
+      /* Setup our variables object based on our form values  */
       const variables: FormValues = {
         name: name.value,
         description: description.value,
@@ -44,6 +47,7 @@ const AddMovie: React.FunctionComponent = () => {
         imdb_url: imdb_url.value,
       };
 
+      /* Pass form values to our addMovie mutation */
       addMovie({ variables });
     },
     [addMovie]
@@ -52,10 +56,15 @@ const AddMovie: React.FunctionComponent = () => {
   return (
     <AddMovieStyle>
       <h1>Add a favorite movie</h1>
+
+      {/* Show an error message when something is failing */}
       {error && (
         <ErrorMessageStyle message={`Error adding movie. ${error.message}`} />
       )}
+
+      {/* Show processing message when a movie is being added */}
       {loading && <div>Processing...</div>}
+
       <AddMovieFormStyle method="POST" onSubmit={handleSubmit}>
         <fieldset>
           <div>
