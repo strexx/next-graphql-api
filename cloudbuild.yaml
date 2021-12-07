@@ -1,19 +1,28 @@
 steps:
   - name: node
-    entrypoint: npm
-    args: ["install"]
+    entrypoint: "/bin/sh"
+    args:
+      - "-c"
+      - |
+        cd ./src/api
+        npm install
   - name: node
-    entrypoint: npm
-    args: ["run", "build"]
+    entrypoint: "/bin/sh"
+    args:
+      - "-c"
+      - |
+        cd ./src/frontend
+        npm install
+        npm run build
   - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "sh"
+    entrypoint: "/bin/sh"
     args:
       - "-c"
       - |
         cd ./src/frontend
         gcloud app deploy
   - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "sh"
+    entrypoint: "/bin/sh"
     args:
       - "-c"
       - |
